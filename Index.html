@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Adivina el Número</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<div class="container">
+    <h1>Adivina el Número</h1>
+    <p>Intenta adivinar un número entre 0 y 100.</p>
+    <input type="number" id="userInput" min="0" max="100" placeholder="¿?" style="text-align: center;">
+    <button onclick="adivinar()">Adivina El Numero</button>
+    <p class="result" id="result"></p>
+    <button onclick="reiniciar()">Reiniciar juego</button>
+</div>
+
+<script>
+    let numeroAleatorio = Math.floor(Math.random() * 101);
+    let intentos = 0;
+
+    function adivinar() {
+        const userInput = parseInt(document.getElementById('userInput').value);
+        intentos++;
+        let result = document.getElementById('result');
+
+        if (userInput === numeroAleatorio) {
+            result.textContent = `¡Felicidades! Adivinaste el número en ${intentos} intentos.`;
+            result.style.color = "blue";
+        } else if (userInput > numeroAleatorio) {
+            result.textContent = "El número es demasiado alto.";
+            result.style.color = "red";
+        } else if (userInput < numeroAleatorio) {
+            result.textContent = "El número es demasiado bajo.";
+            result.style.color = "red";
+        } else {
+            result.textContent = "Por favor ingresa un número válido.";
+            result.style.color = "blue";
+        }
+    }
+
+    function reiniciar() {
+        numeroAleatorio = Math.floor(Math.random() * 101);
+        intentos = 0;
+        document.getElementById('result').textContent = "";
+        document.getElementById('userInput').value = "";
+    }
+</script>
+
+</body>
+</html>
